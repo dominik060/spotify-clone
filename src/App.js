@@ -102,7 +102,7 @@ function App() {
         setTotal(data.artists.total);
         setNextUrl(data.artists.next);
         console.log(data);
-        setArtists((prevArtists) => [...prevArtists, data.artists.items]);
+        setArtists((prevArtists) => (prevArtists.concat(data.artists.items)));
         console.log("Hello World!");
     };
 
@@ -146,7 +146,7 @@ function App() {
                     >
                         {artists.map((artist, index) => (
                             <div key={artist.id}>
-                                {artist.images.length ? (
+                                {artist.images?.length ? (
                                     <img
                                         width={"100%"}
                                         src={artist.images[0].url}
