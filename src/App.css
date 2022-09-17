@@ -1,39 +1,69 @@
 * {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    padding: 0;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
 }
 
 .App {
-  text-align: center;
-  width: 100%;
+    text-align: center;
+    width: 100%;
 }
 
-
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 button {
-  margin: .4rem .1rem;
-  background-color: #282c34;
-  color: #fff;
-  border-radius: 999px;
-  padding: .1rem .9rem;
-  border: #fff solid;
+    margin: 0.4rem 0.1rem;
+    background-color: #282c34;
+    color: #fff;
+    border-radius: 999px;
+    padding: 0.1rem 0.9rem;
+    border: #fff solid;
 }
 
 input {
-  padding: .1rem .3rem;
-  border-radius: 25px;
+    padding: 0.1rem 0.3rem;
+    border-radius: 25px;
+}
+
+.infinite-scroll-component {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+    gap: 1rem;
+    width: 90vw;
+    margin-top: 2rem;
+}
+
+.artist {
+    width: auto;
+    min-height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: hsl(224, 13%, 17%);
+    padding: 1rem;
+}
+
+.artist > .avatar > img{
+    width: 100%;
+    max-width: 150px;
+    
+    object-fit: cover;
+    background-color: hsl(220, 13%, 15%);
+    /* clip-path: circle(); */
+    /* border-radius: 50%; */
+    /* aspect-ratio: 1 / 1; */
 }

@@ -2,6 +2,8 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import InfiniteScroll from "react-infinite-scroll-component";
+// import Avatar from "react-avatar";
+import Avatar from "@mui/material/Avatar";
 
 function App() {
     // console.log(process.env.REACT_APP_CLIENT_ID)
@@ -59,11 +61,15 @@ function App() {
                 params: {
                     q: searchKey,
                     type: "artist",
-                    limit: 5,
-                    offset: 0,
+                    limit: 12,
                 },
             })
-            .catch(function (error) {
+            .catch((err) => {
+                let message =
+                    typeof err.response !== "undefined"
+                        ? err.response.data.message
+                        : err.message;
+                console.warn("error", message);
                 return setNotFound(true);
             });
 
@@ -94,16 +100,19 @@ function App() {
         //     },
         // });
 
-        const { data } = await axios.get(nextUrl, {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        });
+        const { data } = await axios
+            .get(nextUrl, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .catch(function (error) {
+                return setNotFound(true);
+            });
         setTotal(data.artists.total);
         setNextUrl(data.artists.next);
         console.log(data);
-        setArtists((prevArtists) => (prevArtists.concat(data.artists.items)));
-        console.log("Hello World!");
+        setArtists((prevArtists) => prevArtists.concat(data.artists.items));
     };
 
     useEffect(() => {
@@ -122,7 +131,7 @@ function App() {
                         Login to Spotify
                     </a>
                 ) : (
-                    <button onClick={logout} >Logout</button>
+                    <button onClick={logout}>Logout</button>
                 )}
 
                 {token ? (
@@ -145,16 +154,36 @@ function App() {
                         loader={<h5>Loading...</h5>}
                     >
                         {artists.map((artist, index) => (
-                            <div key={artist.id}>
-                                {artist.images?.length ? (
+                            <div key={artist.id} className="artist">
+                                {/* <Avatar
+                                    name={artist.name}
+                                    round={true}
+                                    src={
+                                        artist.images?.length
+                                            ? artist.images[0].url
+                                            : "https://i.scdn.co/image/ab6761610000e5eb55d39ab9c21d506aa52f7021"
+                                    }
+                                    size={150}
+                                /> */}
+                                <Avatar
+                                    className="avatar"
+                                    alt={artist.name}
+                                    src={
+                                        artist.images?.length
+                                            ? artist.images[0].url
+                                            : "https://i.scdn.co/image/ab6761610000e5eb55d39ab9c21d506aa52f7021"
+                                    }
+                                />
+                                {/* {artist.images?.length ? (
+                                    
+                                ) : (
                                     <img
-                                        width={"100%"}
+
                                         src={artist.images[0].url}
                                         alt=""
                                     />
-                                ) : (
-                                    <div>No Image</div>
-                                )}
+                                    <div className="noimg">No Image</div>
+                                )} */}
                                 {artist.name}
                             </div>
                         ))}
